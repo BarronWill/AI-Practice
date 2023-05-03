@@ -78,4 +78,5 @@ main(){
         trace(0, 5);
     }
     else cout<<"Khong tim thay\n";
+    file.close();
 }
