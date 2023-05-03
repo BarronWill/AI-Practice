@@ -7,9 +7,10 @@
 #include<math.h>
 
 using namespace std;
-const int sz = 8;
+const int sz = 9;
 const int mx = 1000000;
 int parent[sz];
+bool mark[sz] = {};
 
 void trace(int root, int goal){
     vector<int> arr;
@@ -24,8 +25,7 @@ void trace(int root, int goal){
     }
 }
 
-bool BFS(int graph[sz][sz], int root, int final_vertex, bool mark[sz]){
-    memset(mark, false, sizeof(mark));
+int BFS(int graph[sz][sz], int root, int final_vertex){
     queue<int> child;
     child.push(root);
     while(child.size()){
@@ -47,14 +47,15 @@ bool BFS(int graph[sz][sz], int root, int final_vertex, bool mark[sz]){
     return 0;
 }
 
-int DFS(int graph[sz][sz], int root, int final_vertex, bool mark[sz]){
+int DFS(int graph[sz][sz], int root, int final_vertex){
     if(root == final_vertex) return 1;
     mark[root] = true;
     int ans = 0;
     for(int i = 0; i < sz; i++){
-        if(mark[i] == false && graph[root][i])
-            ans = max(DFS(graph, i, final_vertex, mark), ans);
+        if(mark[i] == false && graph[root][i]){
+            ans = max(DFS(graph, i, final_vertex), ans);
             parent[i] = root;
+        }
     }
     return ans;
 }
@@ -72,8 +73,7 @@ main(){
     for(int i = 0; i < sz; i++)
         for(int j = 0; j < sz; j++)
             file >> graph[i][j];
-    bool mark[sz] = {};
-    if(DFS(graph, 0, 6, mark)){
+    if(DFS(graph, 0, 5)){
         cout<<"Tim thay\n";
         trace(0, 5);
     }
