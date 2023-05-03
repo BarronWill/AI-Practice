@@ -68,4 +68,5 @@ main(){
     for(auto ch : gt)   flag[ch-'a'] = true;
     file>>goal; 
     execute_forward_chaining();
+    file.close();
 }
