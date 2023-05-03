@@ -222,4 +222,5 @@ int main(){
         for(int j = 0; j < sz; j++)
             file >> graph[i][j];
     execute_A_Star_prqueue(graph, 0, 6);
+    file.close();
 }
